@@ -3,7 +3,7 @@ Interface between the [QUIP](http://www.libatoms.org) and [LAMMPS](http://lammps
 
 ### Installing:
 
-Consult the `lib/quip/README` file for building the packages..
+Consult the `lib/quip/README` file for building the packages.
 
 In your `QUIPforLAMMPS` directory:
 
