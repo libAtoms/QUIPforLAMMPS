@@ -33,10 +33,14 @@ to run a test suite.
 
 2) Building LAMMPS
 2.1) Adding QUIP support
-Enter the LAMMPS library, and extract the quip_for_lammps.tgz tarball here:
+Obtain the most recent version of the QUIPforLAMMPS package:
+$ git clone https://github.com/libAtoms/QUIPforLAMMPS
+$ cd QUIPforLAMMPS
+$ make LAMMPS_DIR=/path/to/lammps/directory install
+
+Enter the LAMMPS directory:
 
 $ cd LAMMPS
-$ tar -xf /path/to/quip_for_lammps.tgz
 $ cd src
 $ make yes-user-quip
 

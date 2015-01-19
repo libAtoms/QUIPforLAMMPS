@@ -2,7 +2,16 @@
 Interface between the [QUIP](http://www.libatoms.org) and [LAMMPS](http://lammps.sandia.gov/) MD codes.
 
 ### Installing:
+
+Consult the `lib/quip/README` file for building the packages..
+
+In your `QUIPforLAMMPS` directory:
+
 `make LAMMPS_DIR=/path/to/lammps/directory install`
+
+In your `${LAMMPS_DIR}/src`:
+
+`make yes-user-quip`
 
 ### Syntax:
 `pair_style quip`
