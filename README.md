@@ -31,7 +31,7 @@ The interface is chiefly intended to be used to run Gaussian Approximation Poten
 
 A QUIP potential is specified by the filename which contains the parameters of
 the potential in XML format, the initialisation string, and the map of atomic
-numbers.
+numbers. In the example the map is a single integer, `14`, meaning that LAMMPS has only one atom type defined, and it is silicon. In case of SiC, the mapping would be `14 6` which then maps LAMMPS atom type **1** onto silicon and atom type **2** onto carbon.
 
 GAP potentials can be obtained from the Data repository section of
 http://www.libatoms.org/, where the appropriate initialisation strings are also
