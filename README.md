@@ -54,8 +54,8 @@ This pair style can only be used via the pair keyword of the
 `run_style respa` command.  It does not support the `inner`, `middle`, `outer` keywords.
 
 ### Restrictions:
-QUIP potentials are parametrised for real units and therefore LAMMPS must also
-be run with real units.
+QUIP potentials are parametrised for `metal` units and therefore LAMMPS must also
+be run with `metal` units.
 
 ### Publications:
 1. AP Bartók, MC Payne, R Kondor, and G Csányi, Physical Review Letters 104, 136403 (2010)
