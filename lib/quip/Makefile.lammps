@@ -5,19 +5,15 @@ F95=$(shell egrep 'F95[ ]*=' ${QUIP_DIR}/Makefiles/Makefile.${QUIP_ARCH} | sed '
 
 include ${QUIP_DIR}/build.${QUIP_ARCH}/Makefile.inc
 
-ifeq (${F95},gfortran)
-	quip_SYSINC = -DQUIP_GFORTRAN
-endif
-
-ifeq (${F95},ifort)
-	quip_SYSINC = -DQUIP_IFORT_ICC
-endif
-
-quip_SYSLIB = -lquip_core -lgap_predict -latoms -lFoX_sax -lFoX_wxml -lFoX_common -lFoX_fsys -lFoX_utils
+quip_SYSLIB = -lquip
 quip_SYSLIB += ${MATH_LINKOPTS}
 
-ifeq (${quip_SYSINC},-DQUIP_IFORT_ICC)
+ifeq (${F95},gfortran)
+	quip_SYSLIB += -lgfortran
+else ifeq (${F95},ifort)
 	quip_SYSLIB += -lifcore -lifport
+else
+$(error fortran compiler >>${F95}<< not recognised. Edit lib/quip/Makefile.lammps to specify the fortran library your linker should link to)
 endif
 
 quip_SYSPATH = -L${QUIP_DIR}/build.${QUIP_ARCH} -L${QUIP_DIR}/FoX-4.0.3/objs.${QUIP_ARCH}/lib
