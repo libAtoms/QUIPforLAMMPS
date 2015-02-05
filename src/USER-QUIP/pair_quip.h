@@ -22,24 +22,15 @@ PairStyle(quip,PairQUIP)
 
 #include "pair.h"
 
-#ifdef QUIP_GFORTRAN
-extern "C" void   __quip_lammps_wrapper_module_MOD_quip_lammps_wrapper(int*, int*, int*, 
+extern "C"
+{
+   void quip_lammps_wrapper(int*, int*, int*, 
       int*, int*, int*, 
       int*, int*, double*, 
       int*, int*, double*,
       double*, double*, double*, double*, double*);
-extern "C" void __quip_lammps_wrapper_module_MOD_quip_lammps_potential_initialise(int*, int*, double*, char*, int*, char*, int*);
-#endif
-
-#ifdef QUIP_IFORT_ICC
-extern "C" void quip_lammps_wrapper_module_mp_quip_lammps_wrapper_ (int*, int*, int*, 
-      int*, int*, int*, 
-      int*, int*, double*, 
-      int*, int*, double*,
-      double*, double*, double*, double*, double*);
-extern "C" void quip_lammps_wrapper_module_mp_quip_lammps_potential_initialise_(int*, int*, double*, char*, int*, char*, int*);
-#endif
-
+   void quip_lammps_potential_initialise(int*, int*, double*, char*, int*, char*, int*);
+}
 
 namespace LAMMPS_NS {
 

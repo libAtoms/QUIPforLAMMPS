@@ -33,13 +33,6 @@
 #include "error.h"
 #include "domain.h"
 
-#if !(defined(QUIP_GFORTRAN) || defined(QUIP_IFORT_ICC))
-#error "No QUIP Fortran flag defined"
-#elif defined(QUIP_GFORTRAN) && defined(QUIP_IFORT_ICC)
-#error "More than one QUIP Fortran flag defined"
-#endif
-
-
 using namespace LAMMPS_NS;
 
 /* ---------------------------------------------------------------------- */
@@ -130,22 +123,12 @@ void PairQUIP::compute(int eflag, int vflag)
   lattice[7] = domain->yz;
   lattice[8] = domain->zprd;
 
-#ifdef QUIP_GFORTRAN
-  __quip_lammps_wrapper_module_MOD_quip_lammps_wrapper
+  quip_lammps_wrapper
     (&nlocal,&nghost,atomic_numbers,
      &inum,&sum_num_neigh,ilist,
      quip_num_neigh,quip_neigh,lattice,
      quip_potential,&n_quip_potential,&x[0][0],
      &quip_energy,quip_local_e,quip_virial,quip_local_virial,quip_force);
-#endif
-#ifdef QUIP_IFORT_ICC
-  quip_lammps_wrapper_module_mp_quip_lammps_wrapper_
-    (&nlocal,&nghost,atomic_numbers,
-     &inum,&sum_num_neigh,ilist,
-     quip_num_neigh,quip_neigh,lattice,
-     quip_potential,&n_quip_potential,&x[0][0],
-     &quip_energy,quip_local_e,quip_virial,quip_local_virial,quip_force);
-#endif
   iquip = 0;
   for (ii = 0; ii < ntotal; ii++) {
      for( jj = 0; jj < 3; jj++ ) {
@@ -267,24 +250,14 @@ void PairQUIP::coeff(int narg, char **arg)
   // of quip_potential. This behaviour is invoked by setting n_potential_quip to 0.
   n_quip_potential = 0;
   quip_potential = new int[0];
-#ifdef QUIP_GFORTRAN
-  __quip_lammps_wrapper_module_MOD_quip_lammps_potential_initialise(quip_potential,&n_quip_potential,&cutoff,quip_file,&n_quip_file,quip_string,&n_quip_string);
-#endif
-#ifdef QUIP_IFORT_ICC
-  quip_lammps_wrapper_module_mp_quip_lammps_potential_initialise_(quip_potential,&n_quip_potential,&cutoff,quip_file,&n_quip_file,quip_string,&n_quip_string);
-#endif
+  quip_lammps_potential_initialise(quip_potential,&n_quip_potential,&cutoff,quip_file,&n_quip_file,quip_string,&n_quip_string);
   delete [] quip_potential;
 
   // Allocate quip_potential integer array. This initialise call will transfer the location of the
   // previously initialised potential to the quip_potential variable, and we will use it as a handle
   // when calling the actual calculation routine. We return the cutoff as well.
   quip_potential = new int[n_quip_potential];
-#ifdef QUIP_GFORTRAN
-  __quip_lammps_wrapper_module_MOD_quip_lammps_potential_initialise(quip_potential,&n_quip_potential,&cutoff,quip_file,&n_quip_file,quip_string,&n_quip_string);
-#endif
-#ifdef QUIP_IFORT_ICC
-  quip_lammps_wrapper_module_mp_quip_lammps_potential_initialise_(quip_potential,&n_quip_potential,&cutoff,quip_file,&n_quip_file,quip_string,&n_quip_string);
-#endif
+  quip_lammps_potential_initialise(quip_potential,&n_quip_potential,&cutoff,quip_file,&n_quip_file,quip_string,&n_quip_string);
 }
 
 /* ----------------------------------------------------------------------
