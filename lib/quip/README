@@ -17,15 +17,15 @@ If GAP is needed, it may be downloaded from the `Software' section of libatoms.o
 1.2) Building QUIP
 There is a README file in the top-level QUIP directory, but here are the main steps.
 The Makefiles directory contains a selection of machine- and compiler-specific makefiles, e.g. Makefile.linux_x86_64_gfortran. Decide which one is most appropriate for your system, and edit if necessary. The configuring step will use the makefile based on the QUIP_ARCH environment variable, i.e. Makefile.${QUIP_ARCH}. The script will create a build directory, build.${QUIP_ARCH}, and all the building will happen there. First it will ask you some questions about where you keep libraries and other stuff,
-if you don't use something it is asking for, just leave it blank. NB make sure to answer `y' to `Do you want to compile with GAP prediction support ? [y/n]'. The answers will be stored in Makefile.inc in the build.${QUIP_ARCH} directory, and you can edit them later (e.g. to change optimisation or debug options). Note that the default state is usually with rather heavy debugging on, including bounds checking, which makes the code quite slow. The make command has to be executed from the top-level directory. Making `eval' ensures all the necessary libraries will be built.
+if you don't use something it is asking for, just leave it blank. NB make sure to answer `y' to `Do you want to compile with GAP prediction support ? [y/n]'. The answers will be stored in Makefile.inc in the build.${QUIP_ARCH} directory, and you can edit them later (e.g. to change optimisation or debug options). Note that the default state is usually with rather heavy debugging on, including bounds checking, which makes the code quite slow. The make command has to be executed from the top-level directory. Making `libquip' ensures all the necessary libraries will be built.
 
 for example:
 
 $ cd QUIP
 $ export QUIP_DIR=/path/to/QUIP
 $ export QUIP_ARCH=linux_x86_64_gfortran
-$ Make config
-$ make QUIP_Core
+$ make config
+$ make libquip
 
 Optionally, do
 $ make test
