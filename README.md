@@ -1,4 +1,6 @@
-# QUIPforLAMMPS
+# *OBSOLETE* QUIPforLAMMPS
+As LAMMPS is now shipped with a built-in interface, this package has become obsolete.
+
 Interface between the [QUIP](http://www.libatoms.org) and [LAMMPS](http://lammps.sandia.gov/) MD codes.
 
 ### Installing:
